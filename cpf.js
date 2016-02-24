@@ -24,12 +24,20 @@ var CPF = function() {
 		var d2 = d1*2+n9*3+n8*4+n7*5+n6*6+n5*7+n4*8+n3*9+n2*10+n1*11;
 		d2 = 11 - digit(d2, 11);
 		if (d2 >= 10) d2 = 0;
-		return ''+n1+n2+n3+'.'+n4+n5+n6+'.'+n7+n8+n9+'-'+d1+d2;
+		var result = ''+n1+n2+n3+'.'+n4+n5+n6+'.'+n7+n8+n9+'-'+d1+d2;
+		return this.dotted ?
+			result : 
+			result.replace(/([.-])/g, '');
 	}	 
 }
 
 CPF.identifier = "com.matheusmoraes.cpf";
 CPF.title = "CPF Randomizer";
+CPF.inputs = [
+	DynamicValueInput('dotted', 'Punctuation', 'Checkbox', {
+		"choices": { "yes":"" }
+	})
+];
 registerDynamicValueClass(CPF);
 
 
